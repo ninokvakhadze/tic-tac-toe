@@ -1,5 +1,8 @@
 import  { useState } from 'react';
 import { GameBox, Cell } from './styles';
+import PlayerX from "./assets/icon-x.svg"
+import PlayerO from "./assets/icon-o.svg"
+
 
 export function MultiPlayer() {
  const [player, setPlayer] = useState("X")
@@ -63,7 +66,8 @@ export function MultiPlayer() {
        <GameBox>
          {cells.map((value, i) => (
            <Cell key={i} onClick={() => handleClick(i)}>
-             {value}
+            {value === "X" && <img src={PlayerX} alt="X" />}
+            {value === "0" && <img src={PlayerO} alt="O" />}
            </Cell>
          ))}
        </GameBox>

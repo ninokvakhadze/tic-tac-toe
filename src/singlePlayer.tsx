@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { GameBox, Cell } from "./styles";
 import type { Player } from "./App";
+import PlayerX from "./assets/icon-x.svg"
+import PlayerO from "./assets/icon-o.svg"
 
 export function SinglePlayer({ choosePlayer }: Player) {
   const [cells, setCells] = useState(Array(9).fill(""));
@@ -96,7 +98,8 @@ export function SinglePlayer({ choosePlayer }: Player) {
       <GameBox>
         {cells.map((value, i) => (
           <Cell key={i} onClick={() => handleClick(i)}>
-            {value}
+            {value === "X" && <img src={PlayerX} alt="X" />}
+            {value === "0" && <img src={PlayerO} alt="O" />}
           </Cell>
         ))}
       </GameBox>
