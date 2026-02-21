@@ -10,8 +10,8 @@ interface HomeProps {
 function Home({ choosePlayer, setChoosePlayer }: HomeProps) {
   return (
     <MainDiv>
+      <Logo src={logo} />
       <MainComp>
-        <Logo src={logo} />
         <ButtonsDiv>
           <Pick>PICK PLAYER 1’S MARK</Pick>
           <Buttons>
@@ -20,11 +20,24 @@ function Home({ choosePlayer, setChoosePlayer }: HomeProps) {
           </Buttons>
         </ButtonsDiv>
       </MainComp>
-      <Link to={choosePlayer == "" ? "" : "single_player"}>
-        <button>single player</button>
+      <Link
+        style={{ width: "100%" }}
+        to={choosePlayer == "" ? "" : "single_player"}
+      >
+        <PlayerButton
+          bg="rgba(101, 233, 228, 1)"
+          shadow="rgba(17, 140, 135, 1)"
+        >
+          NEW GAME (VS CPU)
+        </PlayerButton>
       </Link>
-      <Link to={choosePlayer == "" ? "" : "multi_player"}>
-        <button>multi player</button>
+      <Link
+        style={{ width: "100%" }}
+        to={choosePlayer == "" ? "" : "multi_player"}
+      >
+        <PlayerButton bg="rgba(255, 200, 96, 1)" shadow="rgba(204, 139, 19, 1)">
+          NEW GAME (VS PLAYER)
+        </PlayerButton>
       </Link>
     </MainDiv>
   );
@@ -59,8 +72,9 @@ const Logo = styled.img`
 
 const Pick = styled.h2`
   color: var(--silver);
-  font-size: clamp(1rem, 3vw, 2rem);
+  font-size: clamp(0.6rem, 1vw, 0.85rem);
   text-align: center;
+  // padding: 0 5rem;
 `;
 
 const ButtonsDiv = styled.div`
@@ -72,12 +86,12 @@ const ButtonsDiv = styled.div`
 
 const Buttons = styled.div`
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   gap: 1rem;
 `;
 
 const Button = styled.button`
-  padding: 0.75rem 1.5rem;
+  padding: 1.25rem 2rem;
   font-size: clamp(0.9rem, 2.5vw, 1.2rem);
   border-radius: 8px;
   border: none;
@@ -85,8 +99,29 @@ const Button = styled.button`
   background: var(--silver);
   color: #333;
   transition: background 0.3s;
-
+  padding: 1rem 5rem;
   &:hover {
     background: #ccc;
   }
+`;
+
+interface PlayerButtonProps {
+  bg?: string;
+  shadow?: string;
+}
+
+const PlayerButton = styled.button<PlayerButtonProps>`
+  padding: 1.25rem 1.3rem;
+  font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: var(--silver);
+  color: #333;
+  transition: background 0.3s;
+  width: 100%;
+  box-sizing: border-box;
+  background: ${({ bg }) => bg || "var(--silver)"};
+  box-shadow: 0px -8px 0px 0px ${({ shadow }) =>
+      shadow || "rgba(16, 33, 42, 1)"} inset;
 `;
