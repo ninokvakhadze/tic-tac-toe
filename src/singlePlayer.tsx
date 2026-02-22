@@ -1,14 +1,10 @@
 import { useState, useEffect } from "react";
-import { GameBox, Cell } from "./styles";
-import styled from "styled-components";
+import { GameBox, Cell, ScoresDiv, Score } from "./styles";
 import type { Player } from "./App";
 import PlayerX from "./assets/icon-x.svg";
 import PlayerO from "./assets/icon-o.svg";
 
-interface PlayerButtonProps {
-  bg?: string;
-  shadow?: string;
-}
+
 
 export function SinglePlayer({ choosePlayer }: Player) {
   const [cells, setCells] = useState(Array(9).fill(""));
@@ -91,7 +87,7 @@ export function SinglePlayer({ choosePlayer }: Player) {
     <>
       <button
         onClick={() => {
-          firstMove();
+          setCells(Array(9).fill("")), setPlayer("X");
         }}
       >
         restart
@@ -105,23 +101,12 @@ export function SinglePlayer({ choosePlayer }: Player) {
         ))}
       </GameBox>
       <ScoresDiv>
-        <Score bg="#65E9E4">player1 {endGame.player1}</Score>
-        <Score bg="#62C0BC">tie {endGame.tie}</Score>
-        <Score bg="#E9B451">player2 {endGame.player2}</Score>
+        <Score bg="#65E9E4">X ({choosePlayer == "X"? "YOU": "CPU"})<br/>{endGame.player1}</Score>
+        <Score bg="var(--silver)">TIES<br/>{endGame.tie}</Score>
+        <Score bg="#E9B451">O ({choosePlayer == "O"? "YOU": "CPU"})<br/>{endGame.player2}</Score>
       </ScoresDiv>
     </>
   );
 }
 
-const ScoresDiv = styled.div`
-  display: flex;
-  gap: 1rem;
-  justify-content: space-between;
-  min-width: 20%;
-`;
-const Score = styled.div<PlayerButtonProps>`
-  padding: 15px;
-  background: ${({ bg }) => bg || "var(--silver)"};
-  box-shadow: 0px -8px 0px 0px ${({ shadow }) =>
-      shadow || "rgba(16, 33, 42, 1)"} inset;
-`;
+

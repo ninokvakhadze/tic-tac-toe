@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+interface PlayerButtonProps {
+  bg?: string;
+  shadow?: string;
+}
+
 export const GameBox = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -21,4 +26,20 @@ export const Cell = styled.div`
   font-size: clamp(1rem, 4vw, 2rem);
   cursor: pointer;
   transition: background 0.2s;
+`;
+
+export const ScoresDiv = styled.div`
+  display: flex;
+  gap: 1rem;
+  justify-content: space-between;
+  min-width: 20%;
+`;
+export const Score = styled.div<PlayerButtonProps>`
+  padding: 15px;
+  background: ${({ bg }) => bg || "var(--silver)"};
+  border-radius: 16px;
+  min-width: 60px;
+  width: 7.5rem;
+  height: 3.25rem;
+  text-align: center;
 `;
